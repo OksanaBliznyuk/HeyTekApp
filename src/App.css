@@ -1,4 +1,120 @@
-.App {
+/*________________RentHomepage____________*/
+
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  background-color: #fff;
+}
+
+.main {
+  width: 100vw;
+  height: 80vh;
+  margin-top: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-right: 30vw;
+}
+
+h1 {
+  font-family: cursive;
+  font-size: 2.4625rem;
+  font-weight: 600;
+}
+
+h2 {
+  font-family: var(--font-family--text, "Nunito Sans", sans-serif);
+  font-size: 1.1625rem;
+  font-weight: 400;
+  color: #1e1e1e;
+  text-align: left;
+  background-color: #fff;
+}
+
+.main-image {
+  width: 50vw;
+  height: 50vh;
+  background-size: 100%;
+}
+
+.link-btn:hover {
+  background-color: #8db9a0;
+}
+
+.info-icon {
+  width: 80;
+}
+
+
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  body {
+    background-color: #8db9a0;
+  }
+  .main-image {
+    width: 100vw;
+    height: 40vh;
+    background-size: 100%;
+  }
+
+  h1 {
+    font-size: 2.0625rem;
+  }
+
+  .link-btn {
+    width: 180px;
+    height: 50px;
+  border-radius: 25px;
+  }
+};
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  body {
+    background-color: rgb(10, 97, 97);
+  }
+};
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  body {
+    background-color: rgb(185, 143, 91);
+  
+   
+  }
+};
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  body {
+    background-color: rgb(93, 83, 71);
+  }
+};
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  body {
+    background-color: #d7eace;
+  }
+};
+
+
+
+
+
+/*.App {
+
   text-align: center;
 }
 
@@ -35,4 +151,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+}*/
