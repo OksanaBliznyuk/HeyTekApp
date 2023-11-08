@@ -1,5 +1,5 @@
 // storage.js (en separat fil)
-export function setLocalStorageItem(key, value) {
+/*export function setLocalStorageItem(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
   }
   
@@ -10,5 +10,5 @@ export function setLocalStorageItem(key, value) {
   
   export function removeLocalStorageItem(key) {
     localStorage.removeItem(key);
-  }
+  }*/
   

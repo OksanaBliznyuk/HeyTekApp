@@ -1,0 +1,15 @@
+{
+  "name": "Equipment Table",
+  "category": "",
+  "columns": [
+    {
+      "id": "",
+      "name": "Navn",
+      "number": "Antall",
+      "joinDate": "Lonedato",
+      "deliveryDate": "Innleveringsdato",
+      "role": "Avdeling",
+      "actions": "Status"
+    }
+  ]
+}
