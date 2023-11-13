@@ -1,3 +1,4 @@
+// EquipmentTable.js
 import React, { useState } from "react";
 import {
   Table,
@@ -14,16 +15,15 @@ import {
 import SaveIcon from "@mui/icons-material/Save";
 import CreateIcon from "@mui/icons-material/Create";
 import ClearIcon from "@mui/icons-material/Clear";
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-// Fjern importen for DeleteOutlineIcon hvis du ikke trenger den
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+
 
 const getInitialData = () => [
   // Legg til flere data etter behov
 ];
 
-const EquipmentTable = () => {
+const EquipmentTable = ({ data, setData }) => {
   const [editRowIndex, setEditRowIndex] = useState(-1);
-  const [data, setData] = useState(getInitialData);
   const [newRow, setNewRow] = useState({
     id: "",
     name: "",
@@ -34,8 +34,19 @@ const EquipmentTable = () => {
     status: "",
   });
 
+  const saveDataToLocalStorage = (data) => {
+    localStorage.setItem("equipmentData", JSON.stringify(data));
+  };
+
+  const loadDataFromLocalStorage = () => {
+    const storedData = localStorage.getItem("equipmentData");
+    return storedData ? JSON.parse(storedData) : getInitialData();
+  };
+
   const handleAddRow = () => {
-    setData([...data, newRow]);
+    const updatedData = [...data, newRow];
+    setData(updatedData);
+    saveDataToLocalStorage(updatedData);
     setNewRow({
       id: "",
       name: "",
@@ -52,14 +63,18 @@ const EquipmentTable = () => {
   };
 
   const handleSaveRow = (index) => {
-    // Implementerer lagring av redigerte data her
+    // Implement saving edited data here
+    const updatedData = [...data];
     setEditRowIndex(-1);
+    setData(updatedData);
+    saveDataToLocalStorage(updatedData);
   };
 
   const handleDeleteRow = (index) => {
-    const newData = [...data];
-    newData.splice(index, 1);
-    setData(newData);
+    const updatedData = [...data];
+    updatedData.splice(index, 1);
+    setData(updatedData);
+    saveDataToLocalStorage(updatedData);
   };
 
   const handleChange = (e, field, index) => {
@@ -75,18 +90,18 @@ const EquipmentTable = () => {
   return (
     <div>
       <TableContainer component={Paper}>
-      <Button color="primary" onClick={handleAddRow}>
-        + Legg til
-      </Button>
+        <Button color="primary" onClick={handleAddRow}>
+          + Legg til
+        </Button>
         <Table>
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Number</TableCell>
-              <TableCell>Loan Date</TableCell>
-              <TableCell>Delivery Date</TableCell>
-              <TableCell>Comments</TableCell>
+              <TableCell>Navn</TableCell>
+              <TableCell>Antall</TableCell>
+              <TableCell>Lånedato</TableCell>
+              <TableCell>Innleveringsdato</TableCell>
+              <TableCell>Kommentar</TableCell>
               <TableCell>Handling</TableCell>
             </TableRow>
           </TableHead>
@@ -103,9 +118,57 @@ const EquipmentTable = () => {
                     row.id
                   )}
                 </TableCell>
-                {/* Resten av tabellrader og kolonner her */}
-                {/* ... */}
-                {/* IKONER */}
+                <TableCell>
+                  {editRowIndex === index ? (
+                    <TextField
+                      value={row.name}
+                      onChange={(e) => handleChange(e, "name", index)}
+                    />
+                  ) : (
+                    row.name
+                  )}
+                </TableCell>
+                <TableCell>
+                  {editRowIndex === index ? (
+                    <TextField
+                      value={row.number}
+                      onChange={(e) => handleChange(e, "number", index)}
+                    />
+                  ) : (
+                    row.number
+                  )}
+                </TableCell>
+                <TableCell>
+                  {editRowIndex === index ? (
+                    <TextField
+                      value={row.loanDate}
+                      onChange={(e) => handleChange(e, "loanDate", index)}
+                    />
+                  ) : (
+                    row.loanDate
+                  )}
+                </TableCell>
+                <TableCell>
+                  {editRowIndex === index ? (
+                    <TextField
+                      value={row.deliveryDate}
+                      onChange={(e) => handleChange(e, "deliveryDate", index)}
+                    />
+                  ) : (
+                    row.deliveryDate
+                  )}
+                </TableCell>
+                <TableCell>
+                  {editRowIndex === index ? (
+                    <TextField
+                      value={row.comments}
+                      onChange={(e) => handleChange(e, "comments", index)}
+                    />
+                  ) : (
+                    row.comments
+                  )}
+                </TableCell>
+                {/* ... (Repeat for other columns) */}
                 <TableCell>
                   <div
                     style={{
@@ -143,7 +206,6 @@ const EquipmentTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
-    
     </div>
   );
 };
