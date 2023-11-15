@@ -1,26 +1,28 @@
-
 // ArduinoStatus.js
 import React, { useState, useEffect } from "react";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 import EquipmentTable from "./EquipmentTable";
 import AddCircleTwoToneIcon from "@mui/icons-material/AddCircleTwoTone";
 
-
-//Kalkulator for antall tilgjengelig
 function ArduinoStatus(props) {
   const { equipment, updateEquipmentData, onEquipmentChange } = props;
+
+  // Lifted state for equipment data
+  const [equipmentData, setEquipmentData] = useState(
+    JSON.parse(localStorage.getItem("equipmentData")) || {}
+  );
 
   const handleAntallChange = (newAntall) => {
     // Oppdater antall enheter i utstyrsdata
     updateEquipmentData(equipment.name, newAntall);
+
+    // Oppdater equipmentData state
+    setEquipmentData((prevData) => ({
+      ...prevData,
+      [equipment.name]: newAntall,
+    }));
 
     //Midlertidig lagre data i localStorage
     const localStorageData = JSON.parse(localStorage.getItem("equipmentData")) || {};
@@ -28,10 +30,8 @@ function ArduinoStatus(props) {
     localStorage.setItem("equipmentData", JSON.stringify(localStorageData));
 
     // Kall funksjonen for å varsle at data har endret seg
-  onEquipmentChange();
-
-  }
-
+    onEquipmentChange();
+  };
 
   const style = {
     position: "absolute",
@@ -71,7 +71,8 @@ function ArduinoStatus(props) {
       >
         <Box sx={{ ...style }}>
           <h2 id="status-modal-title">{props.equipment.name} Status</h2>
-          {<EquipmentTable />}
+          {/* Pass equipmentData and setEquipmentData as props */}
+          <EquipmentTable data={equipmentData} setData={setEquipmentData} />
           <Button onClick={handleClose}>Lukk vindu</Button>
         </Box>
       </Modal>

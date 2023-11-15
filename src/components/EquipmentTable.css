@@ -1,0 +1,6 @@
+/* EquipmentTable.css */
+.equipment-table-container {
+    transform: skew(20deg);
+    overflow: hidden;
+  }
+  

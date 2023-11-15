@@ -7,8 +7,6 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-//import Modal from "@mui/material/Modal";
-//import EquipmentTable from "./EquipmentTable";
 import ArduinoInfo from "./ArduinoInfo";
 import CricutInfo from "./CricutInfo";
 import EdisonRobotsetInfo from "./EdisonRobotsetInfo";
@@ -26,6 +24,7 @@ import CricutStatus from "./CricutStatus";
 import PfaffSymaskinInfo from "./PfaffSymaskinInfo";
 import RaspberryPiInfo from "./RaspberryPiInfo";
 import SpheroBoltInfo from "./SpheroBoltInfo";
+//import { getAllEquipment, updateEquipmentNumber } from "./database";
 
 const columns = [
   { id: "name", label: "Utstyr", minWidth: 170 },
@@ -98,9 +97,15 @@ export default function TablePage() {
     setRows(updatedRows);
   };
 
-  //For Equipment table
-  const handleEquipmentChange = () => {
-    // Dette er der kan oppdateres eller refreshes EquipmentTable
+  //For Equipment table ny antall
+  const handleEquipmentChange = (equipmentName, newAntall) => {
+    const updatedRows = [...rows];
+    updatedRows.forEach((row) => {
+      if (row.name === equipmentName) {
+        row.available = newAntall;
+      }
+    });
+    setRows(updatedRows);
   };
 
   return (

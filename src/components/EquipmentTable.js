@@ -11,12 +11,12 @@ import {
   Button,
   TextField,
   IconButton,
+  Pagination,
 } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import CreateIcon from "@mui/icons-material/Create";
 import ClearIcon from "@mui/icons-material/Clear";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-
 
 const getInitialData = () => [
   // Legg til flere data etter behov
@@ -44,7 +44,7 @@ const EquipmentTable = ({ data, setData }) => {
   };
 
   const handleAddRow = () => {
-    const updatedData = [...data, newRow];
+    const updatedData = [newRow, ...data];  // Legger til newRow øverst i arrayet
     setData(updatedData);
     saveDataToLocalStorage(updatedData);
     setNewRow({
@@ -57,6 +57,7 @@ const EquipmentTable = ({ data, setData }) => {
       status: "",
     });
   };
+  
 
   const handleEditRow = (index) => {
     setEditRowIndex(index);
@@ -88,7 +89,7 @@ const EquipmentTable = ({ data, setData }) => {
   };
 
   return (
-    <div>
+    <div style={{ height: "400px", overflow: "auto" }}>
       <TableContainer component={Paper}>
         <Button color="primary" onClick={handleAddRow}>
           + Legg til
@@ -205,6 +206,7 @@ const EquipmentTable = ({ data, setData }) => {
             ))}
           </TableBody>
         </Table>
+        <Pagination count={Math.ceil(data.length / 10)} color="primary" />
       </TableContainer>
     </div>
   );
